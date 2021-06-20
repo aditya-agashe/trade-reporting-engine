@@ -13,4 +13,8 @@ public class Util {
         Arrays.sort(buyerPartyArray);
         return (Arrays.equals(sellerPartyArray, buyerPartyArray));
     }
+
+    public boolean bankCurrencyCriteria(Bank bank, Currency currency) {
+        return (bank == Bank.EMU_BANK && currency == Currency.AUD) || (bank == Bank.BISON_BANK && currency == Currency.USD);
+    }
 }

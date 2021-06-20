@@ -36,4 +36,24 @@ class UtilTest {
         String buyerParty = "";
         Assertions.assertFalse(util.isAnagran(sellerParty, buyerParty));
     }
+
+    @Test
+    void shouldPassBankCurrencyCriteria_EMU_AUD() {
+        Assertions.assertTrue(util.bankCurrencyCriteria(Bank.EMU_BANK, Currency.AUD));
+    }
+
+    @Test
+    void shouldPassBankCurrencyCriteria_BISON_USD() {
+        Assertions.assertTrue(util.bankCurrencyCriteria(Bank.BISON_BANK, Currency.USD));
+    }
+
+    @Test
+    void shouldPassBankCurrencyCriteria_BISON_AUD() {
+        Assertions.assertFalse(util.bankCurrencyCriteria(Bank.BISON_BANK, Currency.AUD));
+    }
+
+    @Test
+    void shouldPassBankCurrencyCriteria_EMU_USD() {
+        Assertions.assertFalse(util.bankCurrencyCriteria(Bank.EMU_BANK, Currency.USD));
+    }
 }
