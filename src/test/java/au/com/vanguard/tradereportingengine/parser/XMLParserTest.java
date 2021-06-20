@@ -1,13 +1,10 @@
-package au.com.vanguard.tradereportingengine.util;
+package au.com.vanguard.tradereportingengine.parser;
 
 import au.com.vanguard.tradereportingengine.model.Event;
+import au.com.vanguard.tradereportingengine.parser.XMLParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class XMLParserTest {
 

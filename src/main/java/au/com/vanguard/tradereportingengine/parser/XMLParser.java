@@ -1,4 +1,4 @@
-package au.com.vanguard.tradereportingengine.util;
+package au.com.vanguard.tradereportingengine.parser;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 
-public class XMLParser {
+public class XMLParser implements Parser {
 
     private File inputFile;
 
