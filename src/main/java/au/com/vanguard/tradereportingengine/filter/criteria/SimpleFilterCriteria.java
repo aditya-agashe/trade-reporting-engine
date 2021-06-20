@@ -21,9 +21,9 @@ public class SimpleFilterCriteria implements FilterCriteria {
         if (sellerParty.isEmpty() || buyerParty.isEmpty()) {
             return false;
         }
-        char[] sellerPartyArray = sellerParty.toCharArray();
+        char[] sellerPartyArray = sellerParty.toUpperCase().toCharArray();
         Arrays.sort(sellerPartyArray);
-        char[] buyerPartyArray = buyerParty.toCharArray();
+        char[] buyerPartyArray = buyerParty.toUpperCase().toCharArray();
         Arrays.sort(buyerPartyArray);
         return (Arrays.equals(sellerPartyArray, buyerPartyArray));
     }

@@ -25,6 +25,13 @@ class SimpleFilterCriteriaTest {
     }
 
     @Test
+    void shouldBeAnagram_SmallCAPS() {
+        String sellerParty = "KANMU_EB";
+        String buyerParty = "emu_bank";
+        Assertions.assertTrue(simpleFilterCriteria.isAnagram(sellerParty, buyerParty));
+    }
+
+    @Test
     void shouldNotBeAnagram() {
         String sellerParty = "KANMU-EB";
         String buyerParty = "EMU_BANK";
@@ -44,8 +51,18 @@ class SimpleFilterCriteriaTest {
     }
 
     @Test
+    void shouldPassBankCurrencyCriteria_EMU_AUD_SmallCAPS() {
+        Assertions.assertTrue(simpleFilterCriteria.isCorrectBankCurrency("emu_bank", "aud"));
+    }
+
+    @Test
     void shouldPassBankCurrencyCriteria_BISON_USD() {
         Assertions.assertTrue(simpleFilterCriteria.isCorrectBankCurrency(Bank.BISON_BANK.name(), Currency.USD.name()));
+    }
+
+    @Test
+    void shouldPassBankCurrencyCriteria_BISON_USD_SmallCAPS() {
+        Assertions.assertTrue(simpleFilterCriteria.isCorrectBankCurrency("bison_bank", "usd"));
     }
 
     @Test
