@@ -20,6 +20,7 @@ public class EventController {
 
     @PostMapping("/events")
     public List<Event> createEvents(@RequestBody EventLocation eventLocation) {
+        // Better practice is to use a transfer object for response rather than exposing the entity directly, here Event
         return eventService.processXMLFiles(eventLocation.getDirPath());
     }
 

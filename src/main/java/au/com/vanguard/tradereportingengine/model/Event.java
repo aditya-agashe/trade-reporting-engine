@@ -13,6 +13,7 @@ public class Event {
     private Long id;
     private String buyerParty;
     private String sellerParty;
+    // Better to use BigDecimal for currency amount
     private String amount;
     private String currency;
 
