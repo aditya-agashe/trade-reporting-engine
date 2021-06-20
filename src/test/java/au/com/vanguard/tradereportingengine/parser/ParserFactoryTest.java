@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ParserFactoryTest {
     private ParserFactory parserFactory;
 
@@ -15,7 +13,7 @@ class ParserFactoryTest {
     }
 
     @Test
-    void getParser() {
-        Assertions.assertTrue((parserFactory.getParser("some path")) instanceof XMLParser);
+    void shouldReturnXMLParser() {
+        Assertions.assertTrue((parserFactory.getParser()) instanceof XMLParser);
     }
 }

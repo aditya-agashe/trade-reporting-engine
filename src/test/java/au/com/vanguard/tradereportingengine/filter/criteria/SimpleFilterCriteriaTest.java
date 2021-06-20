@@ -59,7 +59,7 @@ class SimpleFilterCriteriaTest {
     }
 
     @Test
-    void shouldFilter() {
+    void shouldReturnOneEvent() {
         Event event = new Event.Builder()
                 .withSellerParty(Bank.EMU_BANK.name())
                 .withBuyerParty("LEFT_BANK")

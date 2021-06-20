@@ -9,6 +9,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import au.com.vanguard.tradereportingengine.model.Event;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import java.io.File;
@@ -16,13 +18,12 @@ import java.io.IOException;
 
 public class XMLParser implements Parser {
 
+    Logger logger = LoggerFactory.getLogger(XMLParser.class);
+
     private File inputFile;
 
-    public XMLParser(String pathToXML) {
+    public Event process(String pathToXML) {
         this.inputFile = new File(pathToXML);
-    }
-
-    public Event process() {
         return new Event.Builder()
                 .withId(-1)
                 .withBuyerParty(getBuyerParty())
@@ -32,19 +33,19 @@ public class XMLParser implements Parser {
                 .build();
     }
 
-    String getBuyerParty() {
+    private String getBuyerParty() {
         return getValueByXPath("//buyerPartyReference/@href", "attribute");
     }
 
-    String getSellerParty() {
+    private String getSellerParty() {
         return getValueByXPath("//sellerPartyReference/@href", "attribute");
     }
 
-    String getAmount() {
+    private String getAmount() {
         return getValueByXPath("//paymentAmount/amount", "element");
     }
 
-    String getCurrency() {
+    private String getCurrency() {
         return getValueByXPath("//paymentAmount/currency", "element");
     }
 
@@ -74,14 +75,8 @@ public class XMLParser implements Parser {
             } else {
                 return "";
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException | IOException | SAXException | XPathExpressionException e) {
+            logger.error("Error occurred while processing file: {} ", inputFile.getAbsolutePath(), e);
         }
 
         return "";
