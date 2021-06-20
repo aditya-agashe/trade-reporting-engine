@@ -1,5 +1,6 @@
 package au.com.vanguard.tradereportingengine.util;
 
+import au.com.vanguard.tradereportingengine.model.Event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -97,5 +98,17 @@ class XMLParserTest {
     void shouldReturnEmptyCurrency_NoSuchFile() {
         xmlParser = new XMLParser("src/test/resources/eventXML/randomFileDoesNotExist.xml");
         Assertions.assertEquals("", xmlParser.getCurrency());
+    }
+
+
+    @Test
+    void shouldReturnPopulatedEvent() {
+        xmlParser = new XMLParser("src/test/resources/eventXML/eventCorrect.xml");
+        Event event = xmlParser.process();
+        // NOT A GOOD PRACTICE TO HAVE MULTIPLE ASSERTS IN ONE TEST-CASE. THIS IS AN EXCEPTION
+        Assertions.assertEquals("LEFT_BANK", event.getBuyerParty());
+        Assertions.assertEquals("EMU_BANK", event.getSellerParty());
+        Assertions.assertEquals("100.00", event.getAmount());
+        Assertions.assertEquals("AUD", event.getCurrency());
     }
 }

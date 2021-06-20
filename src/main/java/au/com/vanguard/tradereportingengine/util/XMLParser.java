@@ -8,6 +8,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import au.com.vanguard.tradereportingengine.model.Event;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import java.io.File;
@@ -21,19 +22,29 @@ public class XMLParser {
         this.inputFile = new File(pathToXML);
     }
 
-    public String getBuyerParty() {
+    public Event process() {
+        return new Event.Builder()
+                .withId(-1)
+                .withBuyerParty(getBuyerParty())
+                .withSellerParty(getSellerParty())
+                .withAmount(getAmount())
+                .withCurrency(getCurrency())
+                .build();
+    }
+
+    String getBuyerParty() {
         return getValueByXPath("//buyerPartyReference/@href", "attribute");
     }
 
-    public String getSellerParty() {
+    String getSellerParty() {
         return getValueByXPath("//sellerPartyReference/@href", "attribute");
     }
 
-    public String getAmount() {
+    String getAmount() {
         return getValueByXPath("//paymentAmount/amount", "element");
     }
 
-    public String getCurrency() {
+    String getCurrency() {
         return getValueByXPath("//paymentAmount/currency", "element");
     }
 
@@ -75,6 +86,5 @@ public class XMLParser {
 
         return "";
     }
-
 
 }
